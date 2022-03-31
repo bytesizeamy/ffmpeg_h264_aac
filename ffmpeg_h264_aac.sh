@@ -5,12 +5,19 @@ output=${input//mkv/mp4}
 SECONDS=0
 
 args=(
-    -hide_banner -loglevel 0 -stats             #minimal output
+    -hide_banner        #minimal output
+    -loglevel 0
+    -stats
     -i "$input"
-    -c:v libx264 -level 4.1 -preset veryslow    #video settings
-    -crf 24 -vsync vfr -tune grain
-    -c:a aac -b:a 192k                          #audio settings
-    # -c:s vobsub                                 #subtitle
+    -c:v libx264        #video settings
+    -level 4.1
+    -preset veryslow
+    -crf 24
+    -vsync vfr
+    -tune grain
+    -c:a aac            #audio settings
+    -b:a 192k           
+    # -c:s vobsub         #ffmpeg doesn't like bitmap subtitle files apparently
     "$output"
 )
 
